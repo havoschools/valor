@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head><meta charset="UTF-8" /><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.v="2.0.0",this.userEvents=["keydown","keyup","mousedown","mouseup","mousemove","mouseover","mouseenter","mouseout","mouseleave","touchmove","touchstart","touchend","touchcancel","wheel","click","dblclick","input","visibilitychange"],this.browserEvents=["DOMContentLoaded","load","pageshow","readystatechange"],this.attributeEvents=["onblur","onclick","oncontextmenu","ondblclick","onfocus","onmousedown","onmouseenter","onmouseleave","onmousemove","onmouseout","onmouseover","onmouseup","onmousewheel","onscroll","onsubmit"]}async _mainFlow(){this._interceptCSPIssue(),this._interceptPageShow(),this._interceptUserEvents(),this._interceptEventListeners(this),this._interceptHtmlEventsAttribute(),this._interceptDirectClickFunctions(this),this._preconnect3rdParties(),await Promise.all([this._waitForUserInput(),this._waitForDomReady()]),this.lastBreath=Date.now(),this._interceptDirectBrowserFunctions(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),this._releaseHtmlEventsAttribute(),this._releaseEventListeners(),await this._triggerDOMContentLoaded(),await this._pendingWebpackRequests(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this.everythingLoaded=!0,this._releaseUserEvents(),this._emptyTrash()}_interceptCSPIssue(){this.CSPIssue=sessionStorage.getItem("rocketCSPIssue"),document.addEventListener("securitypolicyviolation",(t=>{this.CSPIssue||"script-src-elem"!==t.violatedDirective||"data"!==t.blockedURI||(this.CSPIssue=!0,sessionStorage.setItem("rocketCSPIssue",!0))}),{isRocket:!0})}_interceptPageShow(){window.addEventListener("pageshow",(t=>{this.persisted=t.persisted,this.everythingLoaded&&(document.onreadystatechange&&document.onreadystatechange(),window.onload&&window.onload(),window.onpageshow&&window.onpageshow({persisted:this.persisted}))}))}_userEventHandler(t){if(!this.userActionTriggered){const e=this.ignoreFirst.indexOf(t.type);e>=0?this.ignoreFirst.splice(e,1):"keyup"===t.type||(this.userActionTriggered=!0,this.onFirstUserAction&&this.onFirstUserAction())}"click"===t.type&&t.preventDefault(),this.savedUserEvents.length>0&&(t.stopPropagation(),t.stopImmediatePropagation()),this.savedUserEvents.push(t)}_interceptUserEvents(){this.userActionTriggered=!1,this.ignoreFirst=["mousemove","mouseover"],this.savedUserEvents=[],this.userEventHandler=this._userEventHandler.bind(this),this.userEvents.forEach((t=>window.addEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})))}_releaseUserEvents(){this.userEvents.forEach((t=>window.removeEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0}))),this.savedUserEvents.forEach((t=>{t.target.dispatchEvent(new window[t.constructor.name](t.type,t))}))}_interceptHtmlEventsAttribute(){this.eventsMutationObserver=new MutationObserver((t=>{const e="return false";for(const r of t){if("attributes"===r.type){const t=r.target.getAttribute(r.attributeName);t&&t!==e&&(r.target.setAttribute("data-rocket-"+r.attributeName,t),r.target.setAttribute(r.attributeName,e))}"childList"===r.type&&r.addedNodes.forEach((t=>{if(t.nodeType===Node.ELEMENT_NODE)for(const r of t.attributes)this.attributeEvents.includes(r.name)&&r.value&&""!==r.value&&(t.setAttribute("data-rocket-"+r.name,r.value),t.setAttribute(r.name,e))}))}})),this.eventsMutationObserver.observe(document,{subtree:!0,childList:!0,attributeFilter:this.attributeEvents})}_releaseHtmlEventsAttribute(){this.eventsMutationObserver.disconnect(),this.attributeEvents.forEach((t=>{document.querySelectorAll("[data-rocket-"+t+"]").forEach((e=>{e.setAttribute(t,e.getAttribute("data-rocket-"+t)),e.removeAttribute("data-rocket-"+t)}))}))}_interceptDirectClickFunctions(t){Object.defineProperty(HTMLElement.prototype,"onclick",{get(){return this.rocketonclick},set(e){this.rocketonclick=e,this.setAttribute(t.everythingLoaded?"onclick":"data-rocket-onclick","this.rocketonclick(event)")}})}_interceptDirectBrowserFunctions(t){function e(e,r){let s=e[r];e[r]=null,Object.defineProperty(e,r,{get:()=>s,set(i){t.everythingLoaded?s=i:e["rocket"+r]=s=i}})}e(document,"onreadystatechange"),e(window,"onload"),e(window,"onpageshow");try{Object.defineProperty(document,"readyState",{get:()=>t.rocketReadyState,set(e){t.rocketReadyState=e},configurable:!0}),document.readyState="loading"}catch(t){console.log("WPRocket DJE readyState conflict, bypassing")}}_interceptEventListeners(t){this.originalAddEventListener=EventTarget.prototype.addEventListener,this.originalRemoveEventListener=EventTarget.prototype.removeEventListener,this.savedEventListeners=[],EventTarget.prototype.addEventListener=function(e,r,s){const i=t.browserEvents.includes(e);s&&s.isRocket||i&&!t.userActionTriggered?t.originalAddEventListener.call(this,e,r,s):t.savedEventListeners.push({target:this,remove:!1,type:e,func:r,options:s})},EventTarget.prototype.removeEventListener=function(e,r,s){const i=t.browserEvents.includes(e);s&&s.isRocket||i&&!t.userActionTriggered?t.originalRemoveEventListener.call(this,e,r,s):t.savedEventListeners.push({target:this,remove:!0,type:e,func:r,options:s})}}_releaseEventListeners(){EventTarget.prototype.addEventListener=this.originalAddEventListener,EventTarget.prototype.removeEventListener=this.originalRemoveEventListener,this.savedEventListeners.forEach((t=>{let e=t.type;this.browserEvents.includes(e)&&(e="rocket-"+e),t.target||(t.target=window),t.remove?t.target.removeEventListener(e,t.func,t.options):t.target.addEventListener(e,t.func,t.options)}))}_delayJQueryReady(t){let e;function r(e){return t.everythingLoaded?e:e.split(" ").map((t=>"load"===t||t.startsWith("load.")?"rocket-jquery-load":t)).join(" ")}function s(s){function i(t){const e=s.fn[t];s.fn[t]=s.fn.init.prototype[t]=function(){return this[0]===window&&("string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=r(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{const e=arguments[0][t];delete arguments[0][t],arguments[0][r(t)]=e}))),e.apply(this,arguments),this}}s&&s.fn&&!t.allJQueries.includes(s)&&(s.fn.ready=s.fn.init.prototype.ready=function(e){return t.domReadyFired?e.bind(document)(s):document.addEventListener("rocket-DOMContentLoaded",(()=>e.bind(document)(s))),s([])},i("on"),i("one"),i("off"),t.allJQueries.push(s)),e=s}t.allJQueries=[],s(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){s(t)}})}_handleDocumentWrite(){const t=new Map;document.write=document.writeln=function(e){const r=document.currentScript,s=document.createRange(),i=r.parentElement;let n=t.get(r);void 0===n&&(n=r.nextSibling,t.set(r,n));const o=document.createDocumentFragment();s.setStart(o,0),o.appendChild(s.createContextualFragment(e)),i.insertBefore(o,n)}}async _waitForUserInput(){return new Promise((t=>{this.userActionTriggered?t():this.onFirstUserAction=t}))}async _waitForDomReady(){return new Promise((t=>{document.addEventListener("DOMContentLoaded",t,{isRocket:!0})}))}async _pendingWebpackRequests(){const t=document.querySelector("script[data-webpack]");t&&(await async function(){return new Promise((e=>{t.addEventListener("load",e,{isRocket:!0}),t.addEventListener("error",e,{isRocket:!0})}))}(),await this._requestAnimFrame(),await this._pendingWebpackRequests())}_registerAllDelayedScripts(){this.delayedScripts={normal:[],async:[],defer:[]},document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)}))}async _preconnect3rdParties(){await this._waitForDomReady();let t=[];document.querySelectorAll("script[type=rocketlazyloadscript][data-rocket-src]").forEach((e=>{let r=e.getAttribute("data-rocket-src");if(r&&!r.startsWith("data:")){r.startsWith("//")&&(r=location.protocol+r);try{const s=new URL(r).origin;s!==location.origin&&t.push({src:s,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}catch(t){}}})),t=[...new Map(t.map((t=>[JSON.stringify(t),t]))).values()],this._batchInjectResourceHints(t,"preconnect")}async _transformScript(t){if(await this._littleBreath(),!0!==t.noModule||!("noModule"in HTMLScriptElement.prototype))return new Promise((e=>{let r;function s(){(r||t).setAttribute("data-rocket-status","executed"),e()}try{if(navigator.userAgent.includes("Firefox/")||""===navigator.vendor||this.CSPIssue)r=document.createElement("script"),[...t.attributes].forEach((t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),r.setAttribute(e,t.nodeValue))})),t.text&&(r.text=t.text),r.hasAttribute("src")?(r.addEventListener("load",s,{isRocket:!0}),r.addEventListener("error",(()=>{r.setAttribute("data-rocket-status","failed-network"),e()}),{isRocket:!0}),setTimeout((()=>{r.isConnected||e()}),1)):(r.text=t.text,s()),t.parentNode.replaceChild(r,t);else{const r=t.getAttribute("data-rocket-type"),i=t.getAttribute("data-rocket-src");r?(t.type=r,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",s,{isRocket:!0}),t.addEventListener("error",(r=>{this.CSPIssue&&r.target.src.startsWith("data:")?(console.log("WPRocket: CSP fallback activated"),t.removeAttribute("src"),this._transformScript(t).then(e)):(t.setAttribute("data-rocket-status","failed-network"),e())}),{isRocket:!0}),i?(t.removeAttribute("data-rocket-src"),t.src=i):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}}catch(r){t.setAttribute("data-rocket-status","failed-transform"),e()}}));t.setAttribute("data-rocket-status","skipped")}async _loadScriptsFromList(t){const e=t.shift();return e&&e.isConnected?(await this._transformScript(e),this._loadScriptsFromList(t)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(t,e){this.trash=this.trash||[];var r=document.createDocumentFragment();t.forEach((t=>{const s=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(s&&!s.startsWith("data:")){const i=document.createElement("link");i.href=s,i.rel=e,"preconnect"!==e&&(i.as="script"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),t.crossOrigin&&(i.crossOrigin=t.crossOrigin),t.integrity&&(i.integrity=t.integrity),r.appendChild(i),this.trash.push(i)}})),document.head.appendChild(r)}_emptyTrash(){this.trash.forEach((t=>t.remove()))}async _triggerDOMContentLoaded(){try{document.readyState="interactive"}catch(t){}this.domReadyFired=!0;try{await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded"))}catch(t){console.error(t)}}async _triggerWindowLoad(){try{document.readyState="complete"}catch(t){}try{await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((t=>t(window).trigger("rocket-jquery-load"))),await this._littleBreath();const t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}catch(t){console.error(t)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((t=>setTimeout(t))):new Promise((t=>requestAnimationFrame(t)))}static run(){(new RocketLazyLoadScripts)._mainFlow()}}RocketLazyLoadScripts.run();</script>
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v22.5 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Home - Valor Education Careers | Current Job Openings</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Playfair%20Display%3A600&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair%20Display%3A600&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair%20Display%3A600&#038;display=swap" /></noscript>
+	<meta name="description" content="As a teacher at one of Valor’s classical schools, you can foster a deep love of learning in your students while working within a supportive team environment. Positions are currently open at our South Austin, North Austin, Kyle, Leander, and San Antonio schools." />
+	<link rel="canonical" href="secondary-nav.html" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Home - Valor Education Careers | Current Job Openings" />
+	<meta property="og:description" content="As a teacher at one of Valor’s classical schools, you can foster a deep love of learning in your students while working within a supportive team environment. Positions are currently open at our South Austin, North Austin, Kyle, Leander, and San Antonio schools." />
+	<meta property="og:url" content="https://careers.valoreducation.org/" />
+	<meta property="og:site_name" content="Valor Education Careers | Current Job Openings" />
+	<meta property="article:modified_time" content="2024-04-04T19:07:50+00:00" />
+	<meta property="og:image" content="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://careers.valoreducation.org/","url":"https://careers.valoreducation.org/","name":"Home - Valor Education Careers | Current Job Openings","isPartOf":{"@id":"https://careers.valoreducation.org/#website"},"about":{"@id":"https://careers.valoreducation.org/#organization"},"primaryImageOfPage":{"@id":"https://careers.valoreducation.org/#primaryimage"},"image":{"@id":"https://careers.valoreducation.org/#primaryimage"},"thumbnailUrl":"https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1.jpg","datePublished":"2023-11-02T15:17:22+00:00","dateModified":"2024-04-04T19:07:50+00:00","description":"As a teacher at one of Valor’s classical schools, you can foster a deep love of learning in your students while working within a supportive team environment. Positions are currently open at our South Austin, North Austin, Kyle, Leander, and San Antonio schools.","breadcrumb":{"@id":"https://careers.valoreducation.org/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://careers.valoreducation.org/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://careers.valoreducation.org/#primaryimage","url":"https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1.jpg","contentUrl":"https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1.jpg","width":350,"height":200,"caption":"Valor South Austin"},{"@type":"BreadcrumbList","@id":"https://careers.valoreducation.org/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https://careers.valoreducation.org/#website","url":"https://careers.valoreducation.org/","name":"Valor Education Careers | Current Job Openings","description":"As a teacher at one of Valor’s classical schools, you can foster a deep love of learning in your students while working within a supportive team environment. Positions are currently open at our Valor South Austin, Valor North Austin, Valor Kyle, Valor Leander, and Valor San Antonio schools.","publisher":{"@id":"https://careers.valoreducation.org/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://careers.valoreducation.org/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://careers.valoreducation.org/#organization","name":"Valor Education Careers | Current Job Openings","url":"https://careers.valoreducation.org/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://careers.valoreducation.org/#/schema/logo/image/","url":"https://careers.valoreducation.org/wp-content/uploads/2023/12/valor-sheild.png","contentUrl":"https://careers.valoreducation.org/wp-content/uploads/2023/12/valor-sheild.png","width":88,"height":100,"caption":"Valor Education Careers | Current Job Openings"},"image":{"@id":"https://careers.valoreducation.org/#/schema/logo/image/"}}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='https://www.google.com/' />
+<link rel='dns-prefetch' href='https://code.jquery.com/' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com/' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Valor Education Careers | Current Job Openings &raquo; Feed" href="https://careers.valoreducation.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Valor Education Careers | Current Job Openings &raquo; Comments Feed" href="https://careers.valoreducation.org/comments/feed/" />
+<link rel="preload" href="https://careers.valoreducation.org/wp-content/plugins/bb-plugin/fonts/fontawesome/5.15.4/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://careers.valoreducation.org/wp-content/plugins/bb-plugin/fonts/fontawesome/5.15.4/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<style id='wp-emoji-styles-inline-css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://careers.valoreducation.org/wp-includes/css/dist/block-library/style.min.css?ver=6.5.2' media='all' />
+<style id='wp-block-library-theme-inline-css'>
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:#ffffffa6}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:#ffffffa6}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:#ffffffa6}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:#ffffffa6}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:#ffffffa6}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:#ffffffa6}.wp-block-video{margin:0 0 1em}.wp-block-template-part.has-background{margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
+</style>
+<style id='classic-theme-styles-inline-css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--fl-heading-text: #11345a;--wp--preset--color--fl-body-bg: #f2f2f2;--wp--preset--color--fl-body-text: #14345a;--wp--preset--color--fl-accent: #cb9865;--wp--preset--color--fl-accent-hover: #cfa383;--wp--preset--color--fl-topbar-bg: #ffffff;--wp--preset--color--fl-topbar-text: #000000;--wp--preset--color--fl-topbar-link: #428bca;--wp--preset--color--fl-topbar-hover: #428bca;--wp--preset--color--fl-header-bg: #ffffff;--wp--preset--color--fl-header-text: #000000;--wp--preset--color--fl-header-link: #428bca;--wp--preset--color--fl-header-hover: #428bca;--wp--preset--color--fl-nav-bg: #ffffff;--wp--preset--color--fl-nav-link: #428bca;--wp--preset--color--fl-nav-hover: #428bca;--wp--preset--color--fl-content-bg: #ffffff;--wp--preset--color--fl-footer-widgets-bg: #ffffff;--wp--preset--color--fl-footer-widgets-text: #000000;--wp--preset--color--fl-footer-widgets-link: #428bca;--wp--preset--color--fl-footer-widgets-hover: #428bca;--wp--preset--color--fl-footer-bg: #ffffff;--wp--preset--color--fl-footer-text: #000000;--wp--preset--color--fl-footer-link: #428bca;--wp--preset--color--fl-footer-hover: #428bca;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link data-minify="1" rel='stylesheet' id='fl-builder-layout-401-css' href='https://careers.valoreducation.org/wp-content/cache/background-css/careers.valoreducation.org/wp-content/cache/min/1/wp-content/uploads/bb-plugin/cache/401-layout.css?ver=1713901877&wpr_t=1713957681' media='all' />
+<link data-minify="1" rel='stylesheet' id='wp-job-manager-frontend-css' href='https://careers.valoreducation.org/wp-content/cache/background-css/careers.valoreducation.org/wp-content/cache/min/1/wp-content/plugins/wp-job-manager/assets/dist/css/frontend.css?ver=1713901877&wpr_t=1713957681' media='all' />
+<link data-minify="1" rel='stylesheet' id='font-awesome-5-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/plugins/bb-plugin/fonts/fontawesome/5.15.4/css/all.min.css?ver=1713901877' media='all' />
+<link data-minify="1" rel='stylesheet' id='fl-builder-layout-bundle-a157caca64235dbaef45ade4d6056276-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/uploads/bb-plugin/cache/a157caca64235dbaef45ade4d6056276-layout-bundle.css?ver=1713901877' media='all' />
+<link data-minify="1" rel='stylesheet' id='job-alerts-frontend-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/plugins/wp-job-manager-alerts/assets/dist/css/frontend.css?ver=1713901877' media='all' />
+<link data-minify="1" rel='stylesheet' id='job-alerts-frontend-default-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/plugins/wp-job-manager-alerts/assets/dist/css/frontend.default.css?ver=1713901877' media='all' />
+<link data-minify="1" rel='stylesheet' id='jquery-ui-css' href='https://careers.valoreducation.org/wp-content/cache/background-css/careers.valoreducation.org/wp-content/cache/min/1/ui/1.13.2/themes/smoothness/jquery-ui.min.css?ver=1713901877&wpr_t=1713957681' media='all' />
+<link data-minify="1" rel='stylesheet' id='jm-application-deadline-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/plugins/wp-job-manager-application-deadline/assets/dist/css/frontend.css?ver=1713901877' media='' />
+<link data-minify="1" rel='stylesheet' id='dashicons-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-includes/css/dashicons.min.css?ver=1713901877' media='all' />
+<link data-minify="1" rel='stylesheet' id='wp-job-manager-applications-frontend-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/plugins/wp-job-manager-applications/assets/dist/css/frontend.css?ver=1713901877' media='all' />
+<link data-minify="1" rel='stylesheet' id='wp-job-manager-resume-frontend-css' href='https://careers.valoreducation.org/wp-content/cache/background-css/careers.valoreducation.org/wp-content/cache/min/1/wp-content/plugins/wp-job-manager-resumes/assets/dist/css/frontend.css?ver=1713901877&wpr_t=1713957681' media='all' />
+<link data-minify="1" rel='stylesheet' id='wp-job-manager-tags-frontend-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/plugins/wp-job-manager-tags/assets/dist/css/frontend.css?ver=1713901877' media='all' />
+<link rel='stylesheet' id='jquery-magnificpopup-css' href='https://careers.valoreducation.org/wp-content/plugins/bb-plugin/css/jquery.magnificpopup.min.css?ver=2.8.1' media='all' />
+<link rel='stylesheet' id='base-css' href='https://careers.valoreducation.org/wp-content/themes/bb-theme/css/base.min.css?ver=1.7.15.3' media='all' />
+<link data-minify="1" rel='stylesheet' id='fl-automator-skin-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/uploads/bb-theme/skin-6627e820ee165.css?ver=1713901877' media='all' />
+<link data-minify="1" rel='stylesheet' id='fl-child-theme-css' href='https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/themes/bb-theme-child/style.css?ver=1713901877' media='all' />
+
+<script src="https://careers.valoreducation.org/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script src="https://careers.valoreducation.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js" defer></script>
+<link rel="https://api.w.org/" href="https://careers.valoreducation.org/wp-json/" /><link rel="alternate" type="application/json" href="https://careers.valoreducation.org/wp-json/wp/v2/pages/401" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://careers.valoreducation.org/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.5.2" />
+<link rel='shortlink' href='secondary-nav.html' />
+<link rel="alternate" type="application/json+oembed" href="https://careers.valoreducation.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcareers.valoreducation.org%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://careers.valoreducation.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcareers.valoreducation.org%2F&#038;format=xml" />
+<link rel="icon" href="https://careers.valoreducation.org/wp-content/uploads/2023/12/cropped-valor-favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://careers.valoreducation.org/wp-content/uploads/2023/12/cropped-valor-favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://careers.valoreducation.org/wp-content/uploads/2023/12/cropped-valor-favicon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://careers.valoreducation.org/wp-content/uploads/2023/12/cropped-valor-favicon-270x270.png" />
+		<style id="wp-custom-css">
+			@media screen and (min-width:768px){
+ul.job_listings li.job_listing a {
+	justify-content: space-between;
+}
+	.rp4wp-related-job_listing>ul li.job_listing a div.position, .rp4wp-related-job_listing>ul li.no_job_listings_found a div.position, ul.job_listings li.job_listing a div.position, ul.job_listings li.no_job_listings_found a div.position {
+    width: 65%;
+}
+	.rp4wp-related-job_listing>ul li.job_listing a .meta, .rp4wp-related-job_listing>ul li.no_job_listings_found a .meta, ul.job_listings li.job_listing a .meta, ul.job_listings li.no_job_listings_found a .meta {
+    width: 25%;
+}
+}
+@font-face {
+    font-family: 'freightdisp_probook';
+    src: url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/freightdisp_pro_book-webfont.woff2') format('woff2'),
+         url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/freightdisp_pro_book-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'freightdisp_probook';
+	
+    src: url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/freightdisp_pro_bold-webfont.woff2') format('woff2'),
+         url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/freightdisp_pro_bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'freightdisp_promedium';
+    src: url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/freightdisp_pro_medium-webfont.woff2') format('woff2'),
+         url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/freightdisp_pro_medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Gotham_Book-webfont';
+    src: url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/Gotham_Book-webfont.woff2') format('woff2'),
+         url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/Gotham_Book-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham_Book-webfont';
+    src: url('https://careers.valoreducation.org/wp-content/themes/bb-theme-child/fonts/Gotham_Book-webfont.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, p {
+	font-family: 'freightdisp_probook';
+}
+
+strong .freight-font {
+	font-family: 'freightdisp_probold';
+}
+
+body a, body a:visited {
+	color: #cb9865;
+	text-decoration: underline;
+	font-weight: 500 !important;
+}
+
+body a:hover, body a:active {
+	color: #cfa383;
+	text-decoration: underline;
+	font-weight: 500 !important;
+}
+
+header ul.menu li a {
+	font-family: 'freightdisp_promedium';
+}
+ul.job_listings li.job_listing .apply-btn {
+	font-family: 'Gotham_Book-webfont', sans-serif;
+	text-transform: uppercase;
+}
+header ul.menu li {
+	line-height: 42px !important;
+}
+
+header ul.menu li a:hover {
+	text-decoration: underline;
+	color: #14345a;
+}
+
+h1, h2, h3, h4, h5, h6, .freight-font {
+	font-family: 'freightdisp_probold';
+}
+
+body h2 {
+	margin: 20px 0 25px;
+	line-height: 50px;
+	font-weight: 500 !important;
+	
+}
+
+.fl-button-wrap a {
+	font-family: 'Gotham_Book-webfont', sans-serif !important;
+	font-size: 16px !important;
+	line-height: 1.2em !important;
+}
+
+.job-type-button {
+	max-width: 360px;
+}
+
+.job-type-button a {
+	font-family: 'freightdisp_probook', serif !important;
+	font-size: 24px !important;
+}
+
+.single-job_listing .container-fluid.full-width-image.custom-section-header {
+	height: auto;
+	padding: 120px 0 120px
+}
+
+.single-job_listing .container-fluid.full-width-image.custom-section-header h3 {
+	margin: 0;
+}
+
+body ul.job_listings li.job_listing a, body ul.job_listings li.job_listing a:visited, body ul.job_listings li.job_listing a, body ul.job_listings li.job_listing a:visited {
+		color: #fff !important;
+}
+
+body ul.job_listings li.job_listing a div.position h3, body ul.job_listings li.job_listing a div.position h3:visited {
+	font-weight: 500 !important;
+}
+
+ul.job_listings li.job_listing a div.position h3, ul.job_listings li.job_listing a div.position h3:visited {
+  color: #11345A !important
+}
+
+/* .job_listing a {
+		color: #11345A !important
+} */
+
+body ul.job_listings li.job_listing a .meta .job-type {
+	font-weight: 500 !important;
+	color: #CB9865 !important;
+}
+
+.fl-module-fl-post-content picture {
+	max-width: 50%;
+}
+
+input[type=submit] {
+	background: #11345A;
+	color: #fff;
+	border: 0;
+	padding: 15px 25px;
+}
+
+input[type=submit]:hover {
+	background: #184c84;
+	border: 0;
+}
+
+ul.job_listings {
+	padding-top: 20px;
+}
+
+#remote_position_label {
+	font-size: 16px;
+}
+
+ul.job_listings li.job_listing a {
+	display: flex;
+	align-items: center;
+}
+
+ul.job_listings li.job_listing a .job-type {
+	padding-top: 0 !important;
+}
+
+div.job_listings .load_more_jobs, div.job_listings .load_more_jobs:focus, div.job_listings .load_more_jobs:active {
+	background: #cb9865;!important
+	color: #fff;
+}
+
+.load_more_jobs:hover {
+	background: #1a4c82 !important;
+	color: #fff !important;
+	text-decoration: none;
+}
+
+.job_listings .date time {
+	font-size: 16px;
+}
+
+ul.job_listings li.job_listing a .meta {
+	line-height: 1.25em !important;
+}
+
+.job_filters .search_jobs select {
+	padding: 8px;
+	width: calc(100% - 15px);
+	border-radius: 5px;
+}
+
+.job_filters .search_jobs div.search_remote_position {
+	float: left;
+}
+
+.search_keywords #search_keywords {
+	font-size: 20px;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+.fl-sidebar {
+	margin-bottom: 0;
+}
+
+.fl-sidebar .job_application {
+	padding: 20px 20px 30px 20px;
+}
+
+.fl-sidebar .job_application h3 {
+	margin: 0 0 10px 0;
+}
+
+.fl-sidebar .job_application a {
+	width: auto;
+	margin: 0 auto;
+	padding: 15px 15px;
+	border-radius: 0;
+	color: #fff;
+}
+
+/* .fl-sidebar .job_application a:hover {
+	background: #4c9ee5;
+} */
+
+.fl-sidebar .wp-block-heading {
+	margin: 0;
+}
+
+.fl-sidebar h3.wp-block-heading, .fl-sidebar h4.fl-widget-title {
+	font-size: 28px !important;
+	text-align: center;
+}
+
+.fl-sidebar aside {
+	margin-bottom: 15px;
+}
+
+.fl-post-date {
+	background: #11345A;
+	color: #fff;
+	padding: 10px 15px;
+	text-transform: uppercase;
+	font-size: 14px;
+	letter-spacing: 2px;
+}
+
+.job-type {
+	text-transform: uppercase;
+	font-size: 16px !important;
+	letter-spacing: 2px;
+	padding: 10px 15px !important;
+	font-family: 'Gotham_Book-webfont', sans-serif;
+}
+
+.job-listing-meta li {
+	font-size: 15px;
+}
+a.apply-for-job:hover, .job_application.application:hover {
+    background: #cfa383;
+}
+.job_application.application {
+	text-align: center;
+}
+
+ul.job_listings li.job_listing .apply-btn, ul.job_listings li.job_listing .apply-btn:active, ul.job_listings li.job_listing .apply-btn:active, ul.job_listings li.job_listing .apply-btn:active:visited {
+	background: #cb9865!important;
+} 
+ul.job_listings li.job_listing .apply-btn:hover
+ {
+	background: #cfa383!important;
+}
+
+li.job_listing ul.meta .job-type {
+	padding-bottom: 0 !important;
+}
+
+.job_listing .fl-post-date, .job_listing .location, .job_listing .date-posted, .job_listing .salary, .search_remote_position, .rss_link {
+	display: none;
+}
+
+/* APPLY NOW BUTTON */
+
+body .apply-for-job {
+    display: inline-block;
+    font-size: 1em;
+    line-height: 1em;
+    text-transform: uppercase;
+    outline: 0;
+    color: #fff;
+    font-weight: 500 !important;
+    text-shadow: none;
+    padding: 1em 2em;
+    text-align: center;
+    font-family: 'Gotham_Book-webfont', sans-serif; 
+		text-decoration:none;
+}
+
+.apply-for-job:hover, .apply-for-job:active {
+    color: #fff;
+    text-decoration: none;
+		background: #11345a; 
+		text-decoration: none; 
+}
+
+.apply-btn {
+	font-family: 'Gotham_Book-webfont', sans-serif;
+}
+
+.job-type-photo .fl-photo-content {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	border: 4px solid #11345a;
+	border-radius: 10px;
+	box-shadow: 0 3px 5px rgba(0,0,0,.3);
+}
+
+.job-type-photo .fl-photo-content::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(17, 52, 90, .4);
+	left: 0;
+	top: 0;
+	border-radius: 5px;
+	pointer-events: none;
+}
+
+.job-type-photo img, .job-type-photo picture {
+	display: block;
+	border-radius: 5px;
+}
+
+.job-type-photo .fl-photo-caption {
+	position: absolute;
+	display: block;
+	width: 100%;
+	transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+	color: #fff;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 1.25em;
+	pointer-events: none;
+}
+
+.job-type-photo .fl-photo-caption::after, .job-type-button a::after {
+	display: block;
+	content: "\f35d";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 14px;
+}
+
+ul.job_listings li.job_listing a div.position h3 {
+	font-size: 29px;
+	line-height: 1.25em;
+}
+
+.custom-section-header h3 {
+	font-size: 44px;
+	width: 1060px;
+	max-width: 100%;
+}
+
+.job_description p {
+	font-size: 20px;
+}
+
+.job-manager .full-time, .job-types .full-time, .job_listing .full-time, .job-manager .part-time, .job-types .part-time, .job_listing .part-time {
+	font-family: 'Gotham_Book-webfont', sans-serif;
+}
+
+.job-manager .job-type, .job-types .job-type, .job_listing .job-type {
+	color: #ceaa92;
+}
+
+.job-manager .full-time, .job-types .full-time, .job_listing .full-time {
+	color: #11345a;	
+}
+
+.job-manager .part-time, .job-types .part-time, .job_listing .part-time {
+	color: #cb9865;
+}
+
+/* Gravity Forms */
+
+.gform_wrapper input[type=submit] {
+	font-family: 'Gotham_Book-webfont', sans-serif;
+}
+.gform_wrapper.gravity-theme .gfield_label {
+   font-weight: 700!important;
+}
+
+.fl-page .gform_drop_area button.button {
+	font-family: 'Gotham_Book-webfont', sans-serif;
+	padding: 15px 25px; 
+}
+
+@media(max-width: 768px) {
+	.single-job_listing .container-fluid.full-width-image.custom-section-header {
+		padding: 60px 0 60px;
+	}
+	.single-job_listing .container-fluid.full-width-image.custom-section-header h3 {
+		font-size: 34px;
+	}
+	.fl-col-small:not(.fl-col-small-full-width) {
+    max-width: 100%!important;
+	}
+.job-type-photo .fl-photo-content {
+		display: inline-block; 
+	}
+}
+
+/* Sajid Styles */
+.bb-job-application input.application_button.button {
+    display: inline-block;
+    font-size: 1.1em;
+    line-height: 1em;
+    margin: 0 0.5em 0 0;
+    outline: 0;
+    padding: 1em 2em;
+    text-align: center;
+}
+
+.bb-job-application .job_application {
+    background-color: #cb9865;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #fff;
+}
+
+.bb-job-application h3.fl-heading {
+     color: #fff;
+     text-align: center;
+}
+
+.custom-section-header {
+    height: 400px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+}
+
+.custom-section-header h3{
+    color: #fff;
+    font-size: 50px;
+    display: inline-block;
+    margin: 120px 0 0 0;
+    padding: 10px;
+}
+
+h1.fl-post-title {
+    display: none;
+}
+
+span.fl-post-author {
+    display: none;
+}
+
+span.fl-sep {
+    display: none;
+}
+.company {
+    display: none !important;
+}
+
+.job-progress-container {
+    display: flex;
+    justify-content: space-between;
+}
+.job-progress-form-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.step-indicator {
+    flex: 1;
+    padding: 20px;
+    background-color: #e0e0e0;
+}
+
+ul.job_listings li.job_listing {
+    display: flex;
+    align-items: center;
+}
+
+ul.job_listings li.job_listing a {
+    width: 100%;
+}
+
+body ul.job_listings li.job_listing .apply-btn {
+    background: #11345A;
+    color: #fff !important;
+    border: 0;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+ul.job_listings li.job_listing .apply-btn:hover, ul.job_listings li.job_listing .apply-btn:active {
+    background: #11345A;
+}
+.step-item {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.current-step {
+    background-color: #11345A;
+    color: white;
+}
+
+.step-container {
+    background-color: #e0e0e0;
+}
+
+.step-heading {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    text-align: center;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 0px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.switch-contanier {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch-contanier .switch-button {
+    margin-right: 10px;
+}
+
+h2.step-headings {
+    font-size: 25px;
+}
+
+h2.step-second-heading {
+    font-size: 20px;
+    color: #fff;
+    border-radius: 8px 8px 0px 0px;
+    padding: 10px;
+    background-color: #11345a;
+}
+
+.apply-title, .apply-para {
+    text-align: left;
+}
+.apply-title {
+    font-size: 20px;
+}
+
+.search-categories-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.single-job_listing .container-fluid.full-width-image.custom-section-header {
+    background-color: #11345a;
+}
+
+button.clear-filter {
+    background-color: transparent;
+    border: none;
+    color: #11345a;
+    font-weight: 600;
+}
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+}
+
+.accordion {
+    background-color: #11345a;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.active, .accordion:hover {
+    background-color: #11345a;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #fff;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+h2.tab-heading {
+    font-size: 15px;
+}
+.single_job_listing .meta .full-time {
+	color: #11345a;
+}
+.single_job_listing .meta .full-time {
+    background-color: #11345a!important;
+    color: #fff!important;
+}
+
+.single_job_listing .meta .job-type {
+    background-color: #CB9865 !important;
+}
+
+.faq-categories ul li {
+	font-size: 20px;
+}
+
+@media (max-width: 991px) {
+	.job_listings li a, .job_listings li a .position, .job_listings li a .location, .job_listings li a .meta {
+		width: 100% !important;
+		text-align: center !important;
+	}
+	
+	ul.job_listings li.job_listing a .meta .job-type {
+	  margin-bottom: 10px !important;
+	}
+}
+
+@media (max-width: 768px) {
+	header .fl-menu-mobile-clone .fl-module-content {
+		margin-top: 0;
+	}
+	header .menu li a {
+		text-align: center;
+		padding-bottom: 0 !important;
+	}
+	ul.job_listings li.job_listing, .job_listings li a {
+		display: block !important;
+	}
+	.job_listings .job_listing {
+		padding-bottom: 25px !important;
+		border-bottom: 1px solid #ccc !important;
+	}
+}
+
+/* .search_categories:first-child {
+	display: none !important;
+} */
+
+/*Added by sajid on 15/02/24 */
+
+ul.job_listings li.job_listing a.apply-btn {
+	padding: 1em !important;
+}
+
+/*Added by sajid on 15/02/24 */
+
+.fl-sidebar {
+	display: block;
+}
+
+/* end Sajid Styles */
+@media screen and (min-width: 768px) {
+	
+  .custom-section-header {
+    min-height: 400px;
+		display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+	.single-job_listing .fl-sidebar .fl-sidebar-right {
+		display: block!important;
+	}
+}
+
+li.job-type.full-time{
+
+color: #cb9865 !important;
+	
+}
+		</style>
+		<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript><meta name="format-detection" content="telephone=no">
+<!-- Google Tag Manager -->
+<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPRHSC8');</script>
+<!-- End Google Tag Manager -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+_linkedin_partner_id = "5911620";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+
+<style id="wpr-lazyload-bg-container"></style><style id="wpr-lazyload-bg-exclusion"></style>
+<noscript>
+<style id="wpr-lazyload-bg-nostyle">.fl-node-ltaxrig4v21o>.fl-row-content-wrap{--wpr-bg-e700b4a7-de49-4c19-8486-1ff6dbc58864: url('https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-jobs-home-desktop-1.jpg');}.rp4wp-related-job_listing>ul.loading,ul.job_listings.loading{--wpr-bg-e34d9010-7868-4bab-adc5-2038ab86ebf3: url('https://careers.valoreducation.org/wp-content/plugins/wp-job-manager/assets/dist/images/ajax-loader.ea183bf2.gif');}div.job_listings .load_more_jobs.loading{--wpr-bg-ffd56de1-5824-4e21-84b4-704def447244: url('https://careers.valoreducation.org/wp-content/plugins/wp-job-manager/assets/dist/images/ajax-loader.ea183bf2.gif');}.ui-widget-header{--wpr-bg-4c6946a1-217e-4742-a68e-01833cecfc92: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png');}.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default,.ui-button,html .ui-button.ui-state-disabled:hover,html .ui-button.ui-state-disabled:active{--wpr-bg-bf811a3d-36d8-4d3e-9fc8-6cc982608b91: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png');}.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus,.ui-button:hover,.ui-button:focus{--wpr-bg-c3476d46-caf1-4760-972b-193761fa5672: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-bg_glass_75_dadada_1x400.png');}.ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active,a.ui-button:active,.ui-button:active,.ui-button.ui-state-active:hover{--wpr-bg-c45135a0-dede-4655-98f8-7509bcef5f6f: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-bg_glass_65_ffffff_1x400.png');}.ui-state-highlight,.ui-widget-content .ui-state-highlight,.ui-widget-header .ui-state-highlight{--wpr-bg-4f1ac651-5c31-4fa4-bb66-ba574f7cc61c: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png');}.ui-state-error,.ui-widget-content .ui-state-error,.ui-widget-header .ui-state-error{--wpr-bg-ae45bb84-1993-42d0-9d8b-97c89af18215: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-bg_glass_95_fef1ec_1x400.png');}.ui-icon,.ui-widget-content .ui-icon{--wpr-bg-11ae5134-3b2a-4f63-bd70-964823bc0dfd: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-icons_222222_256x240.png');}.ui-widget-header .ui-icon{--wpr-bg-292a6d97-102c-4316-926c-e51b1d809e4a: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-icons_222222_256x240.png');}.ui-state-hover .ui-icon,.ui-state-focus .ui-icon,.ui-button:hover .ui-icon,.ui-button:focus .ui-icon{--wpr-bg-3899da79-3a7d-4155-8ceb-81dbbf18b548: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-icons_454545_256x240.png');}.ui-state-active .ui-icon,.ui-button:active .ui-icon{--wpr-bg-981fac59-6e16-436b-9377-cefbef87bf3b: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-icons_454545_256x240.png');}.ui-state-highlight .ui-icon,.ui-button .ui-state-highlight.ui-icon{--wpr-bg-af28f9f4-3def-4974-b6ee-272e0988c518: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-icons_2e83ff_256x240.png');}.ui-state-error .ui-icon,.ui-state-error-text .ui-icon{--wpr-bg-98f44fc2-b022-431d-8b84-1c93adb37807: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-icons_cd0a0a_256x240.png');}.ui-button .ui-icon{--wpr-bg-3409d14d-fc98-4168-9079-b8b9235a7abf: url('https://code.jquery.com/ui/1.13.2/themes/smoothness/images/ui-icons_888888_256x240.png');}div.resumes .load_more_resumes.loading{--wpr-bg-0861d80a-61b9-4f19-a5d2-d13dbc9ee9eb: url('https://careers.valoreducation.org/wp-content/plugins/wp-job-manager-resumes/assets/dist/images/ajax-loader.d7425fe4.gif');}ul.resumes.loading{--wpr-bg-cc9cf944-f3e4-4c46-81d3-92f1808ef8aa: url('https://careers.valoreducation.org/wp-content/plugins/wp-job-manager-resumes/assets/dist/images/ajax-loader.d7425fe4.gif');}</style>
+</noscript>
+<script type="application/javascript">const rocket_pairs = [{"selector":".fl-node-ltaxrig4v21o>.fl-row-content-wrap","style":".fl-node-ltaxrig4v21o>.fl-row-content-wrap{--wpr-bg-e700b4a7-de49-4c19-8486-1ff6dbc58864: url('https:\/\/careers.valoreducation.org\/wp-content\/uploads\/2023\/11\/valor-jobs-home-desktop-1.jpg');}","hash":"e700b4a7-de49-4c19-8486-1ff6dbc58864","url":"https:\/\/careers.valoreducation.org\/wp-content\/uploads\/2023\/11\/valor-jobs-home-desktop-1.jpg"},{"selector":".rp4wp-related-job_listing>ul.loading,ul.job_listings.loading","style":".rp4wp-related-job_listing>ul.loading,ul.job_listings.loading{--wpr-bg-e34d9010-7868-4bab-adc5-2038ab86ebf3: url('https:\/\/careers.valoreducation.org\/wp-content\/plugins\/wp-job-manager\/assets\/dist\/images\/ajax-loader.ea183bf2.gif');}","hash":"e34d9010-7868-4bab-adc5-2038ab86ebf3","url":"https:\/\/careers.valoreducation.org\/wp-content\/plugins\/wp-job-manager\/assets\/dist\/images\/ajax-loader.ea183bf2.gif"},{"selector":"div.job_listings .load_more_jobs.loading","style":"div.job_listings .load_more_jobs.loading{--wpr-bg-ffd56de1-5824-4e21-84b4-704def447244: url('https:\/\/careers.valoreducation.org\/wp-content\/plugins\/wp-job-manager\/assets\/dist\/images\/ajax-loader.ea183bf2.gif');}","hash":"ffd56de1-5824-4e21-84b4-704def447244","url":"https:\/\/careers.valoreducation.org\/wp-content\/plugins\/wp-job-manager\/assets\/dist\/images\/ajax-loader.ea183bf2.gif"},{"selector":".ui-widget-header","style":".ui-widget-header{--wpr-bg-4c6946a1-217e-4742-a68e-01833cecfc92: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_highlight-soft_75_cccccc_1x100.png');}","hash":"4c6946a1-217e-4742-a68e-01833cecfc92","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_highlight-soft_75_cccccc_1x100.png"},{"selector":".ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default,.ui-button,html .ui-button.ui-state-disabled","style":".ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default,.ui-button,html .ui-button.ui-state-disabled:hover,html .ui-button.ui-state-disabled:active{--wpr-bg-bf811a3d-36d8-4d3e-9fc8-6cc982608b91: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_75_e6e6e6_1x400.png');}","hash":"bf811a3d-36d8-4d3e-9fc8-6cc982608b91","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_75_e6e6e6_1x400.png"},{"selector":".ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus,.ui-button","style":".ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus,.ui-button:hover,.ui-button:focus{--wpr-bg-c3476d46-caf1-4760-972b-193761fa5672: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_75_dadada_1x400.png');}","hash":"c3476d46-caf1-4760-972b-193761fa5672","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_75_dadada_1x400.png"},{"selector":".ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active,a.ui-button,.ui-button,.ui-button.ui-state-active","style":".ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active,a.ui-button:active,.ui-button:active,.ui-button.ui-state-active:hover{--wpr-bg-c45135a0-dede-4655-98f8-7509bcef5f6f: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_65_ffffff_1x400.png');}","hash":"c45135a0-dede-4655-98f8-7509bcef5f6f","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_65_ffffff_1x400.png"},{"selector":".ui-state-highlight,.ui-widget-content .ui-state-highlight,.ui-widget-header .ui-state-highlight","style":".ui-state-highlight,.ui-widget-content .ui-state-highlight,.ui-widget-header .ui-state-highlight{--wpr-bg-4f1ac651-5c31-4fa4-bb66-ba574f7cc61c: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_55_fbf9ee_1x400.png');}","hash":"4f1ac651-5c31-4fa4-bb66-ba574f7cc61c","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_55_fbf9ee_1x400.png"},{"selector":".ui-state-error,.ui-widget-content .ui-state-error,.ui-widget-header .ui-state-error","style":".ui-state-error,.ui-widget-content .ui-state-error,.ui-widget-header .ui-state-error{--wpr-bg-ae45bb84-1993-42d0-9d8b-97c89af18215: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_95_fef1ec_1x400.png');}","hash":"ae45bb84-1993-42d0-9d8b-97c89af18215","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-bg_glass_95_fef1ec_1x400.png"},{"selector":".ui-icon,.ui-widget-content .ui-icon","style":".ui-icon,.ui-widget-content .ui-icon{--wpr-bg-11ae5134-3b2a-4f63-bd70-964823bc0dfd: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_222222_256x240.png');}","hash":"11ae5134-3b2a-4f63-bd70-964823bc0dfd","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_222222_256x240.png"},{"selector":".ui-widget-header .ui-icon","style":".ui-widget-header .ui-icon{--wpr-bg-292a6d97-102c-4316-926c-e51b1d809e4a: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_222222_256x240.png');}","hash":"292a6d97-102c-4316-926c-e51b1d809e4a","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_222222_256x240.png"},{"selector":".ui-state-hover .ui-icon,.ui-state-focus .ui-icon,.ui-button .ui-icon","style":".ui-state-hover .ui-icon,.ui-state-focus .ui-icon,.ui-button:hover .ui-icon,.ui-button:focus .ui-icon{--wpr-bg-3899da79-3a7d-4155-8ceb-81dbbf18b548: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_454545_256x240.png');}","hash":"3899da79-3a7d-4155-8ceb-81dbbf18b548","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_454545_256x240.png"},{"selector":".ui-state-active .ui-icon,.ui-button .ui-icon","style":".ui-state-active .ui-icon,.ui-button:active .ui-icon{--wpr-bg-981fac59-6e16-436b-9377-cefbef87bf3b: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_454545_256x240.png');}","hash":"981fac59-6e16-436b-9377-cefbef87bf3b","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_454545_256x240.png"},{"selector":".ui-state-highlight .ui-icon,.ui-button .ui-state-highlight.ui-icon","style":".ui-state-highlight .ui-icon,.ui-button .ui-state-highlight.ui-icon{--wpr-bg-af28f9f4-3def-4974-b6ee-272e0988c518: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_2e83ff_256x240.png');}","hash":"af28f9f4-3def-4974-b6ee-272e0988c518","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_2e83ff_256x240.png"},{"selector":".ui-state-error .ui-icon,.ui-state-error-text .ui-icon","style":".ui-state-error .ui-icon,.ui-state-error-text .ui-icon{--wpr-bg-98f44fc2-b022-431d-8b84-1c93adb37807: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_cd0a0a_256x240.png');}","hash":"98f44fc2-b022-431d-8b84-1c93adb37807","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_cd0a0a_256x240.png"},{"selector":".ui-button .ui-icon","style":".ui-button .ui-icon{--wpr-bg-3409d14d-fc98-4168-9079-b8b9235a7abf: url('https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_888888_256x240.png');}","hash":"3409d14d-fc98-4168-9079-b8b9235a7abf","url":"https:\/\/code.jquery.com\/ui\/1.13.2\/themes\/smoothness\/images\/ui-icons_888888_256x240.png"},{"selector":"div.resumes .load_more_resumes.loading","style":"div.resumes .load_more_resumes.loading{--wpr-bg-0861d80a-61b9-4f19-a5d2-d13dbc9ee9eb: url('https:\/\/careers.valoreducation.org\/wp-content\/plugins\/wp-job-manager-resumes\/assets\/dist\/images\/ajax-loader.d7425fe4.gif');}","hash":"0861d80a-61b9-4f19-a5d2-d13dbc9ee9eb","url":"https:\/\/careers.valoreducation.org\/wp-content\/plugins\/wp-job-manager-resumes\/assets\/dist\/images\/ajax-loader.d7425fe4.gif"},{"selector":"ul.resumes.loading","style":"ul.resumes.loading{--wpr-bg-cc9cf944-f3e4-4c46-81d3-92f1808ef8aa: url('https:\/\/careers.valoreducation.org\/wp-content\/plugins\/wp-job-manager-resumes\/assets\/dist\/images\/ajax-loader.d7425fe4.gif');}","hash":"cc9cf944-f3e4-4c46-81d3-92f1808ef8aa","url":"https:\/\/careers.valoreducation.org\/wp-content\/plugins\/wp-job-manager-resumes\/assets\/dist\/images\/ajax-loader.d7425fe4.gif"}]; const rocket_excluded_pairs = [];</script></head>
+<body class="home page-template-default page page-id-401 fl-builder fl-theme-builder-footer fl-theme-builder-footer-footer fl-theme-builder-header fl-theme-builder-header-header fl-framework-base fl-preset-default fl-full-width fl-search-active beaver-builder-child-theme" itemscope="itemscope" itemtype="https://schema.org/WebPage">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPRHSC8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<img height="1" width="1" style="display:none;" alt="" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E" data-lazy-src="https://px.ads.linkedin.com/collect/?pid=5911620&fmt=gif" /><noscript><img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=5911620&fmt=gif" /></noscript>
+<!-- End Google Tag Manager (noscript) --><a aria-label="Skip to content" class="fl-screen-reader-text" href="secondary-nav.html#fl-main-content">Skip to content</a><div class="fl-page">
+	<header class="fl-builder-content fl-builder-content-51 fl-builder-global-templates-locked" data-post-id="51" data-type="header" data-sticky="1" data-sticky-on="" data-sticky-breakpoint="medium" data-shrink="0" data-overlay="0" data-overlay-bg="transparent" data-shrink-image-height="50px" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader"><div class="fl-row fl-row-full-width fl-row-bg-color fl-node-zi73lvp624du fl-row-default-height fl-row-align-center" data-node="zi73lvp624du">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-jt8icrm5p41n fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width" data-node="jt8icrm5p41n">
+			<div class="fl-col fl-node-mfyju0p95xw8 fl-col-small fl-col-small-custom-width" data-node="mfyju0p95xw8">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-photo fl-node-vdrp0xg2w5qi" data-node="vdrp0xg2w5qi">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-photo fl-photo-align-left" itemscope itemtype="https://schema.org/ImageObject">
+	<div class="fl-photo-content fl-photo-img-png">
+				<a href="index.html" target="_blank" rel="noopener"  itemprop="url">
+				<img decoding="async" class="fl-photo-img wp-image-18 size-full" src="https://careers.valoreducation.org/wp-content/uploads/2023/09/Valor_Education_Horz_Color.png" alt="Valor Education" itemprop="image" height="506" width="1500" title="Valor_Education_Horz_Color"  data-no-lazy="1" srcset="https://careers.valoreducation.org/wp-content/uploads/2023/09/Valor_Education_Horz_Color.png 1500w, https://careers.valoreducation.org/wp-content/uploads/2023/09/Valor_Education_Horz_Color-300x101.png 300w, https://careers.valoreducation.org/wp-content/uploads/2023/09/Valor_Education_Horz_Color-1024x345.png 1024w, https://careers.valoreducation.org/wp-content/uploads/2023/09/Valor_Education_Horz_Color-768x259.png 768w" sizes="(max-width: 1500px) 100vw, 1500px" />
+				</a>
+					</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-k1p90wxilzue fl-col-small-custom-width" data-node="k1p90wxilzue">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-menu fl-node-67ieclo3x5y0 header-menu" data-node="67ieclo3x5y0">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-menu fl-menu-responsive-toggle-mobile">
+	<button class="fl-menu-mobile-toggle hamburger" aria-label="Menu"><span class="fl-menu-icon svg-container"><svg version="1.1" class="hamburger-menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+<rect class="fl-hamburger-menu-top" width="512" height="102"/>
+<rect class="fl-hamburger-menu-middle" y="205" width="512" height="102"/>
+<rect class="fl-hamburger-menu-bottom" y="410" width="512" height="102"/>
+</svg>
+</span></button>	<div class="fl-clear"></div>
+	<nav aria-label="Menu" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement"><ul id="menu-main-menu" class="menu fl-menu-horizontal fl-toggle-none"><li id="menu-item-344" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item"><a href="secondary-nav.html">Current Job Listings</a></li><li id="menu-item-353" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://careers.valoreducation.org/faqs/">Careers FAQs</a></li><li id="menu-item-352" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://careers.valoreducation.org/get-in-touch/">Contact</a></li><li id="menu-item-343" class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" href="index.html">About Valor</a></li></ul></nav></div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+</header>	<div id="fl-main-content" class="fl-page-content" itemprop="mainContentOfPage" role="main">
+
+		
+<div class="fl-content-full container">
+	<div class="row">
+		<div class="fl-content col-md-12">
+			<article class="fl-post post-401 page type-page status-publish hentry" id="fl-post-401" itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+
+			<div class="fl-post-content clearfix" itemprop="text">
+		<div class="fl-builder-content fl-builder-content-401 fl-builder-content-primary fl-builder-global-templates-locked" data-post-id="401"><div class="fl-row fl-row-full-width fl-row-bg-photo fl-node-ltaxrig4v21o fl-row-default-height fl-row-align-center fl-row-bg-overlay" data-node="ltaxrig4v21o">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-full-width fl-node-content">
+		
+<div class="fl-col-group fl-node-n0t6e9fim24p" data-node="n0t6e9fim24p">
+			<div class="fl-col fl-node-20k8mlgznrej" data-node="20k8mlgznrej">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-03qbihc6k1yv" data-node="03qbihc6k1yv">
+	<div class="fl-module-content fl-node-content">
+		<h1 class="fl-heading">
+		<span class="fl-heading-text">Careers</span>
+	</h1>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-6w2kjigzyalv fl-row-default-height fl-row-align-center" data-node="6w2kjigzyalv">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-hrl1ba7368sy" data-node="hrl1ba7368sy">
+			<div class="fl-col fl-node-j1its4up7eqa" data-node="j1its4up7eqa">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-s4ecvlf0b31t" data-node="s4ecvlf0b31t">
+	<div class="fl-module-content fl-node-content">
+		<h2 class="fl-heading">
+		<span class="fl-heading-text">Find Your Next Adventure with Valor</span>
+	</h2>
+	</div>
+</div>
+<div class="fl-module fl-module-rich-text fl-node-tgqa5ydoucxh freight-font" data-node="tgqa5ydoucxh">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<p>As a teacher at one of Valor’s classical schools, you can foster a deep love of learning in your students while working within a supportive team environment. Positions are currently open at our Valor South Austin, Valor North Austin, Valor Kyle, Valor Leander, and Valor San Antonio schools. Our intentional school culture and faculty formation program equip and support teachers within a community of friendship. At Valor, you can pour into others as others pour into you.</p>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-1nz8f9luxq35 fl-row-default-height fl-row-align-center" data-node="1nz8f9luxq35">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-wufc2y87spq4" data-node="wufc2y87spq4">
+			<div class="fl-col fl-node-ajpkubgsqxlt" data-node="ajpkubgsqxlt">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-ruslit935gwp" data-node="ruslit935gwp">
+	<div class="fl-module-content fl-node-content">
+		<h3 class="fl-heading">
+		<span class="fl-heading-text">View Jobs by Type</span>
+	</h3>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-zbrv1odtn9qh fl-row-default-height fl-row-align-center" data-node="zbrv1odtn9qh">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-d4xavuj2g6st fl-col-group-equal-height fl-col-group-align-center" data-node="d4xavuj2g6st">
+			<div class="fl-col fl-node-sxmuj19o6wn8 fl-col-small" data-node="sxmuj19o6wn8">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-16qxtd4ry5nl job-type-button" data-node="16qxtd4ry5nl">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/lower-school-teachers-k-5/" target="_self" class="fl-button">
+							<span class="fl-button-text">Lower School Teachers (K-5)</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-gak749zcfsed fl-col-small" data-node="gak749zcfsed">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-od1kg0cw5nqe job-type-button" data-node="od1kg0cw5nqe">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/upper-school-teachers-6-12/" target="_self" class="fl-button">
+							<span class="fl-button-text">Upper School Teachers (6-12)</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-ut52rfh4gvaj fl-col-small" data-node="ut52rfh4gvaj">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-ucl5r3gw6mfs job-type-button" data-node="ucl5r3gw6mfs">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/school-leadership/" target="_self" class="fl-button">
+							<span class="fl-button-text">School Leadership</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-a8mknozvtjyi fl-row-default-height fl-row-align-center" data-node="a8mknozvtjyi">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-jlqp4ugh3y5b fl-col-group-equal-height fl-col-group-align-center" data-node="jlqp4ugh3y5b">
+			<div class="fl-col fl-node-mosh8ek4b3t1 fl-col-small" data-node="mosh8ek4b3t1">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-6r7azm8e1buq job-type-button" data-node="6r7azm8e1buq">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/athletics/" target="_self" class="fl-button">
+							<span class="fl-button-text">Athletics</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-xr4q1agwzlcv fl-col-small" data-node="xr4q1agwzlcv">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-awz4shrjbl13 job-type-button" data-node="awz4shrjbl13">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/special-education/" target="_self" class="fl-button">
+							<span class="fl-button-text">Special Education</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5euicgklb9wo fl-col-small" data-node="5euicgklb9wo">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-exsp7ot43jmv job-type-button" data-node="exsp7ot43jmv">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/staff/" target="_self" class="fl-button">
+							<span class="fl-button-text">Staff</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-0134qzsxcfyn fl-row-default-height fl-row-align-center" data-node="0134qzsxcfyn">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-jvptmks4ulyn fl-col-group-equal-height fl-col-group-align-center" data-node="jvptmks4ulyn">
+			<div class="fl-col fl-node-gmohbuqdc7j9 fl-col-small" data-node="gmohbuqdc7j9">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-6mznqwoys3pf job-type-button" data-node="6mznqwoys3pf">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/after-school-substitute-teacher/" target="_self" class="fl-button">
+							<span class="fl-button-text">After School or Substitutes</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-sxhuwg5r6tqd fl-col-small" data-node="sxhuwg5r6tqd">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-9qtjfkw35r8y job-type-button" data-node="9qtjfkw35r8y">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/part-time/" target="_self" class="fl-button">
+							<span class="fl-button-text">Part Time</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-vupq74nzl31i fl-col-small" data-node="vupq74nzl31i">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-button fl-node-rq6ij3pbxvfo job-type-button" data-node="rq6ij3pbxvfo">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-full fl-button-center">
+			<a href="https://careers.valoreducation.org/jobs/full-time/" target="_self" class="fl-button">
+							<span class="fl-button-text">Full Time</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-sv9kmb70etw4 fl-row-default-height fl-row-align-center" data-node="sv9kmb70etw4">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-1afn8si7zb0w" data-node="1afn8si7zb0w">
+			<div class="fl-col fl-node-h6iykwfnb9l2" data-node="h6iykwfnb9l2">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-bckmix5jrd90" data-node="bckmix5jrd90">
+	<div class="fl-module-content fl-node-content">
+		<h3 class="fl-heading">
+		<span class="fl-heading-text">View Jobs by Location</span>
+	</h3>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-g8uedwc9knhq fl-row-default-height fl-row-align-center" data-node="g8uedwc9knhq">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-neqm93iwhjg5" data-node="neqm93iwhjg5">
+			<div class="fl-col fl-node-lsyjrn3ezmvh fl-col-small" data-node="lsyjrn3ezmvh">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-photo fl-node-h0c6bzvwmdet job-type-photo" data-node="h0c6bzvwmdet">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-photo fl-photo-align-center" itemscope itemtype="https://schema.org/ImageObject">
+	<div class="fl-photo-content fl-photo-img-jpg">
+				<a href="https://careers.valoreducation.org/jobs/valor-south-austin/" target="_self" itemprop="url">
+				<img fetchpriority="high" decoding="async" class="fl-photo-img wp-image-493 size-full" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20350%20200'%3E%3C/svg%3E" alt="Valor South Austin" itemprop="image" height="200" width="350" title="valor-south-austin-1" data-lazy-srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1-300x171.jpg 300w" data-lazy-sizes="(max-width: 350px) 100vw, 350px" data-lazy-src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1.jpg" /><noscript><img fetchpriority="high" decoding="async" class="fl-photo-img wp-image-493 size-full" src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1.jpg" alt="Valor South Austin" itemprop="image" height="200" width="350" title="valor-south-austin-1" srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-south-austin-1-300x171.jpg 300w" sizes="(max-width: 350px) 100vw, 350px" /></noscript>
+				</a>
+					</div>
+		<div class="fl-photo-caption fl-photo-caption-below" itemprop="caption">Valor South Austin</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-i3oj5sdkt4qr fl-col-small" data-node="i3oj5sdkt4qr">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-photo fl-node-hkwunpc917db job-type-photo" data-node="hkwunpc917db">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-photo fl-photo-align-center" itemscope itemtype="https://schema.org/ImageObject">
+	<div class="fl-photo-content fl-photo-img-jpg">
+				<a href="https://careers.valoreducation.org/jobs/valor-north-austin/" target="_self" itemprop="url">
+				<img decoding="async" class="fl-photo-img wp-image-494 size-full" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20350%20200'%3E%3C/svg%3E" alt="Valor North Austin" itemprop="image" height="200" width="350" title="valor-north-austin" data-lazy-srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-north-austin.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-north-austin-300x171.jpg 300w" data-lazy-sizes="(max-width: 350px) 100vw, 350px" data-lazy-src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-north-austin.jpg" /><noscript><img decoding="async" class="fl-photo-img wp-image-494 size-full" src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-north-austin.jpg" alt="Valor North Austin" itemprop="image" height="200" width="350" title="valor-north-austin" srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-north-austin.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-north-austin-300x171.jpg 300w" sizes="(max-width: 350px) 100vw, 350px" /></noscript>
+				</a>
+					</div>
+		<div class="fl-photo-caption fl-photo-caption-below" itemprop="caption">Valor North Austin</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-2c7jd91lvyou fl-col-small" data-node="2c7jd91lvyou">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-photo fl-node-i60ulro82daj job-type-photo" data-node="i60ulro82daj">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-photo fl-photo-align-center" itemscope itemtype="https://schema.org/ImageObject">
+	<div class="fl-photo-content fl-photo-img-jpg">
+				<a href="https://careers.valoreducation.org/jobs/valor-kyle" target="_self" itemprop="url">
+				<img decoding="async" class="fl-photo-img wp-image-495 size-full" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20350%20200'%3E%3C/svg%3E" alt="Valor Kyle" itemprop="image" height="200" width="350" title="valor-kyle" data-lazy-srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-kyle.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-kyle-300x171.jpg 300w" data-lazy-sizes="(max-width: 350px) 100vw, 350px" data-lazy-src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-kyle.jpg" /><noscript><img decoding="async" class="fl-photo-img wp-image-495 size-full" src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-kyle.jpg" alt="Valor Kyle" itemprop="image" height="200" width="350" title="valor-kyle" srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-kyle.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-kyle-300x171.jpg 300w" sizes="(max-width: 350px) 100vw, 350px" /></noscript>
+				</a>
+					</div>
+		<div class="fl-photo-caption fl-photo-caption-below" itemprop="caption">Valor Kyle</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-d0cvrl5qhka7 fl-row-default-height fl-row-align-center" data-node="d0cvrl5qhka7">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-r640oujdelz3" data-node="r640oujdelz3">
+			<div class="fl-col fl-node-ovj903wt1ain fl-col-small" data-node="ovj903wt1ain">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-photo fl-node-fwuiayo15kg8 job-type-photo" data-node="fwuiayo15kg8">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-photo fl-photo-align-center" itemscope itemtype="https://schema.org/ImageObject">
+	<div class="fl-photo-content fl-photo-img-jpg">
+				<a href="https://careers.valoreducation.org/jobs/valor-leander/" target="_self" itemprop="url">
+				<img decoding="async" class="fl-photo-img wp-image-645 size-full" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20350%20200'%3E%3C/svg%3E" alt="kids on the playground" itemprop="image" height="200" width="350" title="kids on the playground" data-lazy-srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-leander-350x200-crop.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-leander-350x200-crop-300x171.jpg 300w" data-lazy-sizes="(max-width: 350px) 100vw, 350px" data-lazy-src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-leander-350x200-crop.jpg" /><noscript><img decoding="async" class="fl-photo-img wp-image-645 size-full" src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-leander-350x200-crop.jpg" alt="kids on the playground" itemprop="image" height="200" width="350" title="kids on the playground" srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-leander-350x200-crop.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-leander-350x200-crop-300x171.jpg 300w" sizes="(max-width: 350px) 100vw, 350px" /></noscript>
+				</a>
+					</div>
+		<div class="fl-photo-caption fl-photo-caption-below" itemprop="caption">Valor Leander</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-70gm95lyjuti fl-col-small" data-node="70gm95lyjuti">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-photo fl-node-l3sbczve8nqw job-type-photo" data-node="l3sbczve8nqw">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-photo fl-photo-align-center" itemscope itemtype="https://schema.org/ImageObject">
+	<div class="fl-photo-content fl-photo-img-jpg">
+				<a href="https://careers.valoreducation.org/jobs/valor-san-antonio/" target="_self" itemprop="url">
+				<img decoding="async" class="fl-photo-img wp-image-646 size-full" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20350%20200'%3E%3C/svg%3E" alt="kids in reading circle" itemprop="image" height="200" width="350" title="kids in reading circle" data-lazy-srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-san-antonio-350x200-crop.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-san-antonio-350x200-crop-300x171.jpg 300w" data-lazy-sizes="(max-width: 350px) 100vw, 350px" data-lazy-src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-san-antonio-350x200-crop.jpg" /><noscript><img decoding="async" class="fl-photo-img wp-image-646 size-full" src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-san-antonio-350x200-crop.jpg" alt="kids in reading circle" itemprop="image" height="200" width="350" title="kids in reading circle" srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-san-antonio-350x200-crop.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-san-antonio-350x200-crop-300x171.jpg 300w" sizes="(max-width: 350px) 100vw, 350px" /></noscript>
+				</a>
+					</div>
+		<div class="fl-photo-caption fl-photo-caption-below" itemprop="caption">Valor San Antonio</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-z427duqw8gyf fl-col-small" data-node="z427duqw8gyf">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-photo fl-node-fyu4312dbji0 job-type-photo" data-node="fyu4312dbji0">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-photo fl-photo-align-center" itemscope itemtype="https://schema.org/ImageObject">
+	<div class="fl-photo-content fl-photo-img-jpg">
+				<a href="https://careers.valoreducation.org/jobs/valor-all-campuses" target="_self" itemprop="url">
+				<img decoding="async" class="fl-photo-img wp-image-647 size-full" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20350%20200'%3E%3C/svg%3E" alt="kids and teacher in a classroom" itemprop="image" height="200" width="350" title="kids and teacher in a classroom" data-lazy-srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-all-campuses-350x200-crop.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-all-campuses-350x200-crop-300x171.jpg 300w" data-lazy-sizes="(max-width: 350px) 100vw, 350px" data-lazy-src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-all-campuses-350x200-crop.jpg" /><noscript><img decoding="async" class="fl-photo-img wp-image-647 size-full" src="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-all-campuses-350x200-crop.jpg" alt="kids and teacher in a classroom" itemprop="image" height="200" width="350" title="kids and teacher in a classroom" srcset="https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-all-campuses-350x200-crop.jpg 350w, https://careers.valoreducation.org/wp-content/uploads/2023/11/valor-all-campuses-350x200-crop-300x171.jpg 300w" sizes="(max-width: 350px) 100vw, 350px" /></noscript>
+				</a>
+					</div>
+		<div class="fl-photo-caption fl-photo-caption-below" itemprop="caption">Valor Education<br>
+All Listings</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-color fl-node-9da34utpvg1r fl-row-default-height fl-row-align-center" data-node="9da34utpvg1r">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-ty6a29ms05h4" data-node="ty6a29ms05h4">
+			<div class="fl-col fl-node-9dtqjb5za4kg" data-node="9dtqjb5za4kg">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-gmvolr3jtw4h" data-node="gmvolr3jtw4h">
+	<div class="fl-module-content fl-node-content">
+		<h2 class="fl-heading">
+		<span class="fl-heading-text">“Every day at Valor we guide students to encounter extraordinary ideas that have become the taken-for-granted ordinary. We encourage each scholar to encounter an idea in a way they have never considered before—from circuits and how a light switch works, to earthworms and their habitats, to the marvelous phenomena of the moon’s phases, the rock cycle, and the Earth’s weather patterns. The sparkle in their eyes as they observe the beauty in the little things is something that will not fade from their memories.”</span>
+	</h2>
+	</div>
+</div>
+<div class="fl-module fl-module-rich-text fl-node-x1zhvwdysb2i" data-node="x1zhvwdysb2i">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<p style="text-align: center;">— Valor North Austin Teacher</p>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-54680fsrqg91 fl-row-default-height fl-row-align-center" data-node="54680fsrqg91">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-dlw4eut9c1sp" data-node="dlw4eut9c1sp">
+			<div class="fl-col fl-node-kbgmy175lnfv fl-col-small" data-node="kbgmy175lnfv">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-1pkbaeg2yd4v" data-node="1pkbaeg2yd4v">
+	<div class="fl-module-content fl-node-content">
+		<h4 class="fl-heading">
+		<span class="fl-heading-text">Valor Hiring Profile</span>
+	</h4>
+	</div>
+</div>
+<div class="fl-module fl-module-rich-text fl-node-qoelf0yjz4g9" data-node="qoelf0yjz4g9">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<div class="fe-block fe-block-635730b2147cecc4ffaee513">
+<div id="block-635730b2147cecc4ffaee513" class="sqs-block html-block sqs-block-html" data-block-type="2">
+<div class="sqs-block-content">
+<div class="sqs-html-content">
+<p>We are excited to build an outstanding faculty at Valor—a community of professionals, learners, and friends who are united around Valor's mission and vision. As charter schools, we hire people from a wide variety of backgrounds, including those with teaching degrees and certifications, as well as those who do not have these credentials but who have pursued other formative life experiences. We are seeking passionate teachers and professionals who embody these qualities:</p>
+<ul>
+<li>Mission and educational vision alignment</li>
+<li>Subject matter expertise</li>
+<li>Strength of character</li>
+<li>Love of learning</li>
+<li>Commitment to professional growth and development</li>
+<li>Humility and receptivity to coaching</li>
+<li>Practical wisdom</li>
+<li>Aptitude for working with students</li>
+<li>Classroom leadership capacity</li>
+<li>Commitment to collaboration and team unity</li>
+<li>Strong work ethic and an enthusiastic, positive attitude</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-q7ucbpjvh8df fl-col-small" data-node="q7ucbpjvh8df">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-video fl-node-qr75uaj3xdwf" data-node="qr75uaj3xdwf">
+	<div class="fl-module-content fl-node-content">
+		
+<div class="fl-video fl-embed-video">
+	<iframe loading="lazy" title="vimeo-player" src="about:blank" width="640" height="360" frameborder="0"    allowfullscreen data-rocket-lazyload="fitvidscompatible" data-lazy-src="https://player.vimeo.com/video/847734926?h=e13370d36d"></iframe><noscript><iframe title="vimeo-player" src="https://player.vimeo.com/video/847734926?h=e13370d36d" width="640" height="360" frameborder="0"    allowfullscreen></iframe></noscript></div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-fixed-width fl-row-bg-none fl-node-04p5iezxkv79 fl-row-default-height fl-row-align-center" data-node="04p5iezxkv79">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-8sfd0ny71zc5" data-node="8sfd0ny71zc5">
+			<div class="fl-col fl-node-i2tb06ule79g fl-col-small" data-node="i2tb06ule79g">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-nc5v82f7eihd" data-node="nc5v82f7eihd">
+	<div class="fl-module-content fl-node-content">
+		<h5 class="fl-heading">
+		<span class="fl-heading-text">Employee Benefits</span>
+	</h5>
+	</div>
+</div>
+<div class="fl-module fl-module-rich-text fl-node-49ufsdro1tkh" data-node="49ufsdro1tkh">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<div class="fe-block fe-block-635730b2147cecc4ffaee513">
+<div id="block-635730b2147cecc4ffaee513" class="sqs-block html-block sqs-block-html" data-block-type="2">
+<div class="sqs-block-content">
+<div class="sqs-html-content">
+<p class="">Valor offers employees a competitive benefits package, including health benefits and participation in the Teacher Retirement System of Texas (TRS) for eligible positions. We offer competitive plans for medical, dental, vision, accident, disability, and life insurance.</p>
+<p class="">For questions about careers at Valor, please email <a href="mailto:careers@valoreducation.org">careers@valoreducation.org</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+<div class="fl-module fl-module-button fl-node-7l02nycarm1i" data-node="7l02nycarm1i">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-auto fl-button-left">
+			<a href="https://careers.valoreducation.org/jobs/" target="_self" class="fl-button">
+							<span class="fl-button-text">View All Jobs</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-yci5u81zavk0 fl-col-small" data-node="yci5u81zavk0">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-video fl-node-oqxrepc43awg" data-node="oqxrepc43awg">
+	<div class="fl-module-content fl-node-content">
+		
+<div class="fl-video fl-embed-video">
+	<iframe loading="lazy" title="vimeo-player" src="about:blank" width="640" height="360" frameborder="0" allowfullscreen data-rocket-lazyload="fitvidscompatible" data-lazy-src="https://player.vimeo.com/video/847734967?h=0e8dc5784d"></iframe><noscript><iframe title="vimeo-player" src="https://player.vimeo.com/video/847734967?h=0e8dc5784d" width="640" height="360" frameborder="0" allowfullscreen></iframe></noscript></div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+</div>	</div><!-- .fl-post-content -->
+	
+</article>
+
+<!-- .fl-post -->
+		</div>
+	</div>
+</div>
+
+
+	</div><!-- .fl-page-content -->
+	<footer class="fl-builder-content fl-builder-content-48 fl-builder-global-templates-locked" data-post-id="48" data-type="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter"><div class="fl-row fl-row-full-width fl-row-bg-color fl-node-q4niwuefhszm fl-row-default-height fl-row-align-center" data-node="q4niwuefhszm">
+	<div class="fl-row-content-wrap">
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-9uxpbcey6ovd" data-node="9uxpbcey6ovd">
+			<div class="fl-col fl-node-3vgfrji0yz61" data-node="3vgfrji0yz61">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-rich-text fl-node-tua60cpv7now" data-node="tua60cpv7now">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<p style="text-align: center;">Copyright © 2024 Valor Education. All Rights Reserved.  <a style="text-decoration: underline;" href="required-postings.html" target="_blank" rel="noopener">Compliance</a>  |  <a style="text-decoration: underline;" href="non-discriminatory-policy.html" target="_blank" rel="noopener">Non-Discriminatory Policy</a>  |  <a style="text-decoration: underline;" href="https://careers.valoreducation.org/get-in-touch/">Contact Us</a></p>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+</footer>	</div><!-- .fl-page -->
+<script src="https://careers.valoreducation.org/wp-content/plugins/bb-plugin/js/jquery.fitvids.min.js?ver=1.2" id="jquery-fitvids-js"></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/uploads/bb-plugin/cache/401-layout.js?ver=1713901877" id="fl-builder-layout-401-js" defer data-wp-strategy="defer"></script>
+<script src="https://careers.valoreducation.org/wp-content/plugins/bb-plugin/js/jquery.imagesloaded.min.js?ver=2.8.1" id="imagesloaded-js"></script>
+<script src="https://careers.valoreducation.org/wp-content/plugins/bb-plugin/js/jquery.ba-throttle-debounce.min.js?ver=2.8.1" id="jquery-throttle-js"></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/uploads/bb-plugin/cache/05ba88e5be6ff3c5688d621fb18047b0-layout-bundle.js?ver=1713901877" id="fl-builder-layout-bundle-05ba88e5be6ff3c5688d621fb18047b0-js" defer></script>
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index.php\/)?(.*)wp-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/careers.valoreducation.org","onHoverDelay":"100","rateThrottle":"3"};
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script id="rocket_lazyload_css-js-extra">
+var rocket_lazyload_css_data = {"threshold":"300"};
+</script>
+<script id="rocket_lazyload_css-js-after">
+!function o(n,c,a){function s(t,e){if(!c[t]){if(!n[t]){var r="function"==typeof require&&require;if(!e&&r)return r(t,!0);if(u)return u(t,!0);throw(r=new Error("Cannot find module '"+t+"'")).code="MODULE_NOT_FOUND",r}r=c[t]={exports:{}},n[t][0].call(r.exports,function(e){return s(n[t][1][e]||e)},r,r.exports,o,n,c,a)}return c[t].exports}for(var u="function"==typeof require&&require,e=0;e<a.length;e++)s(a[e]);return s}({1:[function(e,t,r){"use strict";!function(){const r="undefined"==typeof rocket_pairs?[]:rocket_pairs,e="undefined"==typeof rocket_excluded_pairs?[]:rocket_excluded_pairs;e.map(t=>{var e=t.selector;const r=document.querySelectorAll(e);r.forEach(e=>{e.setAttribute("data-rocket-lazy-bg-".concat(t.hash),"excluded")})});const o=document.querySelector("#wpr-lazyload-bg-container");var t=rocket_lazyload_css_data.threshold||300;const n=new IntersectionObserver(e=>{e.forEach(t=>{if(t.isIntersecting){const e=r.filter(e=>t.target.matches(e.selector));e.map(t=>{var e;t&&((e=document.createElement("style")).textContent=t.style,o.insertAdjacentElement("afterend",e),t.elements.forEach(e=>{n.unobserve(e),e.setAttribute("data-rocket-lazy-bg-".concat(t.hash),"loaded")}))})}})},{rootMargin:t+"px"});function c(){0<(0<arguments.length&&void 0!==arguments[0]?arguments[0]:[]).length&&r.forEach(t=>{try{const e=document.querySelectorAll(t.selector);e.forEach(e=>{"loaded"!==e.getAttribute("data-rocket-lazy-bg-".concat(t.hash))&&"excluded"!==e.getAttribute("data-rocket-lazy-bg-".concat(t.hash))&&(n.observe(e),(t.elements||(t.elements=[])).push(e))})}catch(e){console.error(e)}})}c();const a=function(){const o=window.MutationObserver;return function(e,t){if(e&&1===e.nodeType){const r=new o(t);return r.observe(e,{attributes:!0,childList:!0,subtree:!0}),r}}}();t=document.querySelector("body"),a(t,c)}()},{}]},{},[1]);
+//# sourceMappingURL=lazyload-css.min.js.map
+</script>
+<script id="registration-validation-js-extra">
+var registration_validation_params = {"ajax_url":"https:\/\/careers.valoreducation.org\/wp-admin\/admin-ajax.php"};
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://careers.valoreducation.org/wp-content/cache/min/1/wp-content/themes/bb-theme-child/assets/js/validation.js?ver=1713901877" id="registration-validation-js" defer></script>
+<script id="gforms_recaptcha_recaptcha-js-extra">
+var gforms_recaptcha_recaptcha_strings = {"site_key":"6Lc-uTApAAAAABBRshZ1PgviPiNeCAQcNCZre6M8","ajaxurl":"https:\/\/careers.valoreducation.org\/wp-admin\/admin-ajax.php","nonce":"18b1e7075a"};
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Lc-uTApAAAAABBRshZ1PgviPiNeCAQcNCZre6M8&amp;ver=1.4.0" id="gforms_recaptcha_recaptcha-js"></script>
+<script src="https://careers.valoreducation.org/wp-content/plugins/bb-plugin/js/jquery.magnificpopup.min.js?ver=2.8.1" id="jquery-magnificpopup-js"></script>
+<script id="fl-automator-js-extra">
+var themeopts = {"medium_breakpoint":"992","mobile_breakpoint":"768","scrollTopPosition":"800"};
+</script>
+<script type="rocketlazyloadscript" data-rocket-src="https://careers.valoreducation.org/wp-content/themes/bb-theme/js/theme.min.js?ver=1.7.15.3" id="fl-automator-js" defer></script>
+<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://careers.valoreducation.org/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script></body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1713975681 -->
